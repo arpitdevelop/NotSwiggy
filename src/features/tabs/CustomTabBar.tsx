@@ -14,6 +14,7 @@ import {
   LiveTabIcon,
   ReorderTabIcon,
 } from './TabIcon';
+import {useAppSelector} from '@states/reducHook';
 
 const CustomTabBar: FC<BottomTabBarProps> = props => {
   const {scrollY} = useSharedState();
@@ -45,7 +46,7 @@ const CustomTabBar: FC<BottomTabBarProps> = props => {
     };
   });
 
-  const isVegMode = true;
+  const isVegMode = useAppSelector(state => state.user.isVegMode);
 
   return (
     <Animated.View

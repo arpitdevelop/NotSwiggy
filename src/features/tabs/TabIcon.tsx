@@ -11,6 +11,7 @@ import Live from '@assets/tabicons/live.png';
 import LiveFocused from '@assets/tabicons/live_focused.png';
 import Dining from '@assets/tabicons/dining.png';
 import DiningFocused from '@assets/tabicons/dining_focused.png';
+import {useAppSelector} from '@states/reducHook';
 
 interface TabProps {
   name: string;
@@ -61,7 +62,7 @@ const TabIcon: FC<TabProps> = memo(({name}) => {
 });
 
 const TabIconFocused: FC<TabProps> = memo(({name}) => {
-  const isVegMode = true;
+  const isVegMode = useAppSelector(state => state.user.isVegMode);
   return (
     <View style={tabStyles}>
       <Image
@@ -86,7 +87,13 @@ const TabIconFocused: FC<TabProps> = memo(({name}) => {
           },
         ]}
       />
-      <CustomText style={textStylesActive}>{name}</CustomText>
+      <CustomText
+        style={[
+          textStylesActive,
+          {color: isVegMode ? Colors.active : Colors.primary},
+        ]}>
+        {name}
+      </CustomText>
     </View>
   );
 });
